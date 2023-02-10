@@ -10,6 +10,13 @@ const GithubContext = React.createContext({
   followers: [],
   repos: [],
   githubUser: [],
+  requests: "",
+  error: {},
+  searchUser: () => {},
+  isLoading: "",
+  isAuthenticated: false,
+  login: () => {},
+  logout: () => {},
 });
 
 export default GithubContext;

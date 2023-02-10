@@ -1,7 +1,7 @@
 import React from "react";
 import GithubContext from "../context/context";
 import styled from "styled-components";
-import { MdBusiness, MdLocationOn, MdLink } from "react-icons/md";
+import { MdBusiness, MdLocationOn, MdLink, MdLinkOff } from "react-icons/md";
 import { useContext } from "react";
 
 const Card = () => {
@@ -28,10 +28,26 @@ const Card = () => {
       <header>
         <img src={avatar_url} alt={name} />
         <div>
-          <h4>{name}</h4>
+          <h4>{name || "No Name"}</h4>
           <p>@{twitter_username || "twitter account not set"}</p>
         </div>
+        <a target="_blank" href={html_url}>
+          Follow
+        </a>
       </header>
+      <p className="bio">{bio}</p>
+      <div className="links">
+        <p>
+          <MdBusiness /> {company || "self"}
+        </p>
+        <p>
+          <MdLocationOn /> {location || "earth"}
+        </p>
+        <a href={`https://${blog}`}>
+          <MdLinkOff />
+          {blog}
+        </a>
+      </div>
     </Wrapper>
   );
 };

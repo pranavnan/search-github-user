@@ -1,10 +1,59 @@
-import React from 'react';
-import { GithubContext } from '../context/context';
-import styled from 'styled-components';
+import React from "react";
+import GithubContext from "../context/context";
+import styled from "styled-components";
+import { useContext } from "react";
 
 const Followers = () => {
-  return <h2>followers component</h2>;
+  const { followers } = useContext(GithubContext);
+
+  return (
+    <Wrapper>
+      <div className="followers">
+        {followers.map((follower, index) => {
+          const { avatar_url: img, html_url, login } = follower;
+          return (
+            <article key={index}>
+              <img src={img} alt={login} />
+              <div>
+                <h4>{login}</h4>
+                <a target="_blank" href={html_url}>
+                  {html_url}
+                </a>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+    </Wrapper>
+  );
 };
+
+/*
+  followers data => 
+
+    {
+    login: 'ThaELL1',
+    id: 37319124,
+    node_id: 'MDQ6VXNlcjM3MzE5MTI0',
+    avatar_url: 'https://avatars3.githubusercontent.com/u/37319124?v=4',
+    gravatar_id: '',
+    url: 'https://api.github.com/users/ThaELL1',
+    html_url: 'https://github.com/ThaELL1',
+    followers_url: 'https://api.github.com/users/ThaELL1/followers',
+    following_url:
+      'https://api.github.com/users/ThaELL1/following{/other_user}',
+    gists_url: 'https://api.github.com/users/ThaELL1/gists{/gist_id}',
+    starred_url: 'https://api.github.com/users/ThaELL1/starred{/owner}{/repo}',
+    subscriptions_url: 'https://api.github.com/users/ThaELL1/subscriptions',
+    organizations_url: 'https://api.github.com/users/ThaELL1/orgs',
+    repos_url: 'https://api.github.com/users/ThaELL1/repos',
+    events_url: 'https://api.github.com/users/ThaELL1/events{/privacy}',
+    received_events_url: 'https://api.github.com/users/ThaELL1/received_events',
+    type: 'User',
+    site_admin: false,
+  }
+  
+  */
 
 const Wrapper = styled.article`
   background: var(--clr-white);
@@ -14,7 +63,7 @@ const Wrapper = styled.article`
   position: relative;
 
   &::before {
-    content: ' followers';
+    content: " followers";
     position: absolute;
     top: 0;
     left: 0;

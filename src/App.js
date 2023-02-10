@@ -1,5 +1,5 @@
 import React from "react";
-import { Dashboard, Login, PrivateRoute, AuthWrapper, Error } from "./pages";
+import { Dashboard, Error } from "./pages";
 import {
   BrowserRouter as Router,
   Switch,
@@ -11,9 +11,9 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Dashboard />} />
+        <Route index element={<Dashboard />} />
 
-        <Route path="/login" element={<Login />} />
+        {/* <Route path="/login" element={<Login />} /> */}
 
         <Route path="*" element={<Error />} />
       </Routes>

@@ -1,9 +1,57 @@
-import React from 'react';
-import styled from 'styled-components';
-import { MdSearch } from 'react-icons/md';
-import { GithubContext } from '../context/context';
+import React from "react";
+import styled from "styled-components";
+import { MdSearch } from "react-icons/md";
+import GithubContext from "../context/context";
+import { useState } from "react";
+import { useContext } from "react";
+
 const Search = () => {
-  return <h2>search component</h2>;
+  const [user, setUser] = useState("");
+  const { isAuthenticated, requests, error, searchUser, isLoading } =
+    useContext(GithubContext);
+
+  // console.log(isAuthenticated);
+
+  // get things from global context
+  function submitHandler(e) {
+    e.preventDefault();
+    if (user) {
+      searchUser(user);
+    }
+    setUser("");
+  }
+
+  return (
+    <section className="section">
+      <Wrapper className="section-center">
+        {error.show && (
+          <ErrorWrapper>
+            <p>{error.msg}</p>
+          </ErrorWrapper>
+        )}
+        <form onSubmit={submitHandler}>
+          <div className="form-control">
+            <MdSearch />
+            <input
+              value={user}
+              onChange={(e) => setUser(e.target.value)}
+              type="text"
+              placeholder="enter github user"
+            />
+            {requests > 0 && !isLoading && (
+              <button
+                className={isAuthenticated ? "" : "btn-disabled"}
+                disabled={!isAuthenticated}
+              >
+                search
+              </button>
+            )}
+          </div>
+        </form>
+        <h3>requests: {requests} / 60</h3>
+      </Wrapper>
+    </section>
+  );
 };
 
 const Wrapper = styled.div`

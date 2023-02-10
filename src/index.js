@@ -7,11 +7,20 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import ContextProvider from "./context/ContextProvider";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
+// dev-wwobm1ajytlvtehm.us.auth0.com
+// xRoN68uap1Tylg6L897RnIXAapI6k06r
+
 root.render(
   <React.StrictMode>
-    <ContextProvider>
-      <App />
-    </ContextProvider>
+    <Auth0Provider
+      domain="dev-wwobm1ajytlvtehm.us.auth0.com"
+      clientId="e1rwembZk3DEiPQyIOHThumXgo77VAfB"
+      redirectUri={window.location.origin}
+    >
+      <ContextProvider>
+        <App />
+      </ContextProvider>
+    </Auth0Provider>
   </React.StrictMode>
 );
 
